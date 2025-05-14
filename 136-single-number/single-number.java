@@ -1,9 +1,14 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        int result = 0;
-        for(int i=0; i<nums.length; i++){
-            result = result ^ nums[i];
+      Arrays.sort(nums);
+      for(int i=1;i<nums.length;i++)
+      {
+        if(nums[i-1]!=nums[i])
+        {
+        return nums[i-1];
         }
-        return result;
+        i++;
+      }
+    return nums[nums.length-1];
     }
 }
