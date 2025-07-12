@@ -1,28 +1,22 @@
+import java.util.Arrays;
+
 class Solution {
     public int thirdMax(int[] nums) {
-        Long first = null, second = null, third = null;
+        Arrays.sort(nums);
 
-        for (int num : nums) {
-            long n = num;
+        int count = 1;
+        int prev = nums[nums.length - 1];
 
-            if ((first != null && n == first) || 
-                (second != null && n == second) || 
-                (third != null && n == third)) {
-                continue;
+        for(int i = nums.length - 2; i >= 0; i--){
+            if(nums[i] != prev){
+                count++;
+                prev = nums[i];
             }
 
-            if (first == null || n > first) {
-                third = second;
-                second = first;
-                first = n;
-            } else if (second == null || n > second) {
-                third = second;
-                second = n;
-            } else if (third == null || n > third) {
-                third = n;
-            }
+            if(count == 3){
+            return nums[i];
+           }
         }
-
-        return third == null ? first.intValue() : third.intValue();
+      return nums[nums.length - 1];
     }
 }
